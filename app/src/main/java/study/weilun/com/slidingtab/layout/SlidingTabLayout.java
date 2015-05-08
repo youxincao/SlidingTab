@@ -1,17 +1,23 @@
 package study.weilun.com.slidingtab.layout;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.TextView;
 
 /**
  * Created by weilun on 2015/5/8.
  */
 public class SlidingTabLayout extends HorizontalScrollView {
+
+    private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
 
     private ViewPager mViewPager;
     private ViewPager.OnPageChangeListener mViewPagerChangeListener ;
@@ -54,8 +60,23 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     private void populateTabStrip() {
-        final PagerAdapter dapter = mViewPager.getAdapter();
+        final PagerAdapter adapter = mViewPager.getAdapter();
         final View.OnClickListener tabClickListener = new TabClickListener();
+
+        for (int i = 0; i < adapter.getCount(); i++) {
+            TextView textView = createDefaultTabView(getContext());
+            textView.setText(adapter.getPageTitle(i));
+            textView.setOnClickListener(tabClickListener);
+        }
+    }
+
+    protected TextView createDefaultTabView(Context context) {
+        TextView textView = new TextView(context);
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
+        textView.setTypeface(Typeface.DEFAULT_BOLD);
+
+        return textView;
     }
 
     private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {
