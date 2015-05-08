@@ -1,8 +1,9 @@
 package study.weilun.com.slidingtab.view;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -60,7 +61,7 @@ public class SlidingTabsBasicFragment extends Fragment {
             View view = getActivity().getLayoutInflater().inflate(R.layout.pager_item, container, false);
             container.addView(view);
 
-            TextView title = (TextView) view.findViewById(R.id.title);
+            TextView title = (TextView) view.findViewById(R.id.item_title);
             title.setText(String.valueOf(position + 1 ));
             return view;
         }
