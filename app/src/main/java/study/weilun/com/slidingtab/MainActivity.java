@@ -1,5 +1,6 @@
 package study.weilun.com.slidingtab;
 
+import android.app.Activity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction transaction =  this.getSupportFragmentManager().beginTransaction();
             SlidingTabsBasicFragment fragment = new SlidingTabsBasicFragment();
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();

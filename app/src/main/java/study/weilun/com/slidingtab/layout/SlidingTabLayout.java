@@ -17,12 +17,18 @@ import android.widget.TextView;
  */
 public class SlidingTabLayout extends HorizontalScrollView {
 
+    public interface TabColorizer {
+        int getIndicatorColor(int position);
+
+        int getDividerColor(int position);
+    }
+
     private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
 
     private ViewPager mViewPager;
-    private ViewPager.OnPageChangeListener mViewPagerChangeListener ;
+    private ViewPager.OnPageChangeListener mViewPagerChangeListener;
 
-    private final SlidingTabStrip mTabStrip ;
+    private final SlidingTabStrip mTabStrip;
 
     public SlidingTabLayout(Context context) {
         this(context, null);
@@ -47,13 +53,14 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     /**
      * 设置显示内容的ViewPager
+     *
      * @param viewPager
      */
     public void setViewPager(ViewPager viewPager) {
         mTabStrip.removeAllViews();
         this.mViewPager = viewPager;
 
-        if( viewPager != null ) {
+        if (viewPager != null) {
             viewPager.setOnPageChangeListener(new InternalViewPagerListener());
             populateTabStrip();
         }
@@ -102,7 +109,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         @Override
         public void onClick(View v) {
             for (int i = 0; i < mTabStrip.getChildCount(); i++) {
-                if( v == mTabStrip.getChildAt(i) ){
+                if (v == mTabStrip.getChildAt(i)) {
                     mViewPager.setCurrentItem(i);
                     return;
                 }
